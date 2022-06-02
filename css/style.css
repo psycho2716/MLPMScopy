@@ -120,8 +120,8 @@ header .top-nav{
 
 .signup-form-container{
     padding: 20px 20px;
-    max-width: 350px;
-    max-height: 425px;
+    max-width: 550px;
+    max-height: 525px;
     background-color: var(--navbar-color);
     border-radius: 8px;
     box-shadow: 1px 2px 4px var(--border-color);

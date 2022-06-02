@@ -39,30 +39,66 @@
         <div class="signup-form-container mt-5">
             <form action="/action.php" >
                 <div class="form-header mb-3">
-                    <span class="text-1">Sign Up</span>
+                    <span class="text-1">Create Account</span>
                 </div>
 
                 <div class="form-body">
                     <div class="row mb-2">
-                        <div class="col-sm-12">
+                        <div class="col-sm">
+                            <span>Name</span>
+                            <input type="text" placeholder="Full Name" class="form-control" name="name" required>
+                            <span class="error"></span>
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-sm">
+                            <span>User Type</span>
+                            <select name="utype" id="" class="form-control">
+                                <option> -- Select -- </option>
+                                <option value="Trainer">Trainers/Registrar</option>
+                                <option value="Teacher">School Director</option>
+                            </select>
+                            
+                        </div>
+
+                        <div class="col-sm-6">
+                            <span>Qualifications</span>
+                            <select name="qualifications" id="" class="form-control">
+                                <option> -- None -- </option>
+                                <option value="CSS">CSS</option>
+                                <option value="House Keeping">House Keeping</option>
+                                <option value="Automotive">Automotive</option>
+                                <option value="Bartending">Bartending</option>
+                            </select>
+                            
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm">
                             <span>Username</span>
                             <input type="text" placeholder="Username" class="form-control" name="username" required>
                             <span class="error"></span>
                         </div>
+                        
+                        
                     </div>
                     <div class="row mb-2">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <span>Password</span>
                             <input type="password" placeholder="Password" class="form-control" name="password" required>
                             <span class="error"></span>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <span>Confirm Password</span>
                             <input type="password" placeholder="Password" class="form-control" name="confirm-password" required>
                             <span class="error"></span>
                         </div>
+                    </div>
+                    <div class="row mb-3">
+                        
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
