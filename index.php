@@ -99,7 +99,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Account Info</a></li>
-                      <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                      <li><a class="dropdown-item" href="logout.php">Sign Out</a></li>
                     </ul>
                   </div>
             </div>
@@ -194,12 +194,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
     </div>
 
 

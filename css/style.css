@@ -119,7 +119,7 @@ header .top-nav{
 }
 
 .signup-form-container{
-    padding: 20px 20px;
+    padding: 10px 20px;
     max-width: 550px;
     max-height: 525px;
     background-color: var(--navbar-color);

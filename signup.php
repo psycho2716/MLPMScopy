@@ -1,3 +1,103 @@
+<?php
+// Include config file
+require_once "config.php";
+ 
+// Define variables and initialize with empty values
+$username = $password = $confirm_password = "";
+$username_err = $password_err = $confirm_password_err = "";
+ 
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Validate username
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter a username.";
+    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))){
+        $username_err = "Username can only contain letters, numbers, and underscores.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE username = ?";
+        
+        if($stmt = mysqli_prepare($con, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $username_err = "This username is already taken.";
+                } else{
+                    $username = trim($_POST["username"]);
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    // Validate password
+    if(empty(trim($_POST["password"]))){
+        $password_err = "Please enter a password.";     
+    } elseif(strlen(trim($_POST["password"])) < 6){
+        $password_err = "Password must have atleast 6 characters.";
+    } else{
+        $password = trim($_POST["password"]);
+    }
+    
+    // Validate confirm password
+    if(empty(trim($_POST["confirm_password"]))){
+        $confirm_password_err = "Please confirm password.";     
+    } else{
+        $confirm_password = trim($_POST["confirm_password"]);
+        if(empty($password_err) && ($password != $confirm_password)){
+            $confirm_password_err = "Password did not match.";
+        }
+    }
+    
+    // Check input errors before inserting in database
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+        
+        // Prepare an insert statement
+        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+         
+        if($stmt = mysqli_prepare($con, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            
+            // Set parameters
+            $param_username = $username;
+            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Redirect to login page
+                header("location: login.php");
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    // Close connection
+    mysqli_close($con);
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +116,7 @@
 
 </head>
 <body>
-    <header>
+    <header class="mb-3">
         <div class="top-nav">
             <div class="logo-container">
                 <a href="login.php" class="logo">
@@ -34,10 +134,11 @@
         </div>
     </header>
     
+    
     <div class="content">
         <!-- Form Starts Here! -->
         <div class="signup-form-container mt-5">
-            <form action="/action.php" >
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" >
                 <div class="form-header mb-3">
                     <span class="text-1">Create Account</span>
                 </div>
@@ -45,61 +146,33 @@
                 <div class="form-body">
                     <div class="row mb-2">
                         <div class="col-sm">
-                            <span>Name</span>
-                            <input type="text" placeholder="Full Name" class="form-control" name="name" required>
+                            <span>Email</span>
+                            <input type="email" placeholder="Full Name" class="form-control" name="name" required>
                             <span class="error"></span>
                         </div>
-
-                        
                     </div>
 
-                    <div class="row mb-2">
-                        <div class="col-sm">
-                            <span>User Type</span>
-                            <select name="utype" id="" class="form-control">
-                                <option> -- Select -- </option>
-                                <option value="Trainer">Trainers/Registrar</option>
-                                <option value="Teacher">School Director</option>
-                            </select>
-                            
-                        </div>
-
-                        <div class="col-sm-6">
-                            <span>Qualifications</span>
-                            <select name="qualifications" id="" class="form-control">
-                                <option> -- None -- </option>
-                                <option value="CSS">CSS</option>
-                                <option value="House Keeping">House Keeping</option>
-                                <option value="Automotive">Automotive</option>
-                                <option value="Bartending">Bartending</option>
-                            </select>
-                            
-                        </div>
-                    </div>
                     <div class="row mb-2">
                         <div class="col-sm">
                             <span>Username</span>
-                            <input type="text" placeholder="Username" class="form-control" name="username" required>
-                            <span class="error"></span>
+                            <input type="text" placeholder="Username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" name="username" value="<?php echo $username; ?>" required>
+                            <span class="invalid-feedback"><?php echo $username_err; ?></span>
                         </div>
-                        
-                        
                     </div>
+
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <span>Password</span>
-                            <input type="password" placeholder="Password" class="form-control" name="password" required>
-                            <span class="error"></span>
+                            <input type="password" placeholder="Password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>" name="password" required>
+                            <span class="invalid-feedback"><?php echo $password_err; ?></span>
                         </div>
                         <div class="col-sm-6">
                             <span>Confirm Password</span>
-                            <input type="password" placeholder="Password" class="form-control" name="confirm-password" required>
-                            <span class="error"></span>
+                            <input type="password" placeholder="Password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>" name="confirm_password" required>
+                            <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        
-                    </div>
+                    
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 

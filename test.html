@@ -4,222 +4,212 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice 1</title>
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <title>Document</title>
+    <!-- Minified Extension CSS Links -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/png">
+    <script src="https://kit.fontawesome.com/8eda353e2c.js" crossorigin="anonymous"></script>
+
+    <!-- External CSS Link -->
+    <link rel="stylesheet" href="css/dashboard.csss">
+
 
     <style>
-        /* -- Google Fonts -- */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-        :root{
-            /* -- Colors -- */
-            --body-color: #fff;
-            --navbar-color: #f0f0f0;
-            --box-shadow-color: #1f1f1f;
-            --text-color: #1f1f1f;
-            --text-alt: #fff;
-            --primary-color: #293462;
-
-            
-        }
-
-
         *{
-            padding: 0;
             margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            list-style: none;
         }
 
-        .navbar{
-            position: fixed;
+        .side-nav{
+            position: relative;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 70px;
-            display: flex;
-            padding: 0 10px;
-            justify-content: space-between;
-            background-color: var(--navbar-color);
-            box-shadow: 0 1px 4px ;
-        }
-
-        .logo-link{
+            width: 280px;
             height: 100%;
-            width: 40%;
-            display: flex;
-            align-items: center;
-            gap: 20px;
+            background-color: red;
         }
 
-        .logo{
-            font-size: 50px;
-            display: flex;
-            align-items: center;
-        }
+        .sidebar-header{
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        .logo a{
-            display: flex;
-            height: 100%;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-color);
-        }
+.sidebar-header .logo-container{
+    height: 100%;
+}
 
-        .links{
-            display: flex;
-            align-items: center;
-        }
+.sidebar-header .logo img{
+    width: 40px;
+}
 
-        .links ul{
-            list-style-type: none;
-            display: flex;
-        }
+.sidebar-header .header-text{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-color);
+}
 
-        .links ul li a{
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 400px;
-            display: block;
-            flex-direction: row;
-            height: 100%;
-            width: 100%;
-            padding: 9px 14px;
-            border-radius: 10px;
-            transition: 0.2s;
-        }
+.header-text .text-1{
+    font-weight: 600;
+    margin-bottom: -5px;
+}
 
-        .links ul li a.active{
-            text-decoration: underline;
-            background-color: var(--primary-color);
-            color: var(--text-alt);
-            
-        }
-
-        .links ul li a:hover{
-            text-decoration: underline;
-            background-color: var(--primary-color);
-            color: var(--text-alt);
-            
-        }
-
-        .links ul li:not(:last-child){
-            margin-right: 20px;
-        }
-
-        .navbar .button-container{
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
-
-        .signup-btn{
-            display: block;
-            padding: 10px 25px;
-            border: 1px solid var(--primary-color);
-            text-decoration: none;
-            border-radius: 10px;
-            color: var(--text-color);
-            font-weight: 600;
-            transition: 0.5s;
-        }
-
-        .signup-btn:hover{
-            background: var(--primary-color);
-            color: var(--text-alt);
-            box-shadow: 1px 2px 2px var(--box-shadow-color);
-        }
-
-
-        .content{
-            width: 100%;
-            height: 100vh;
-            background: #000116;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-
-
-
-        .box-container{
-            width: 400px;
-            height: 200px;
-            background-color: blue;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-end;
-
-        }
-
-        .box-container .box-1{
-            width: 50%;
-            height: 50%;
-            background: green;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-
-        .box-container .box-2{
-            width: 50%;
-            height: 50%;
-            background: red;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
+.header-text .text-2{
+    font-size: 12px;
+}
     </style>
+
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo-link">
+    <div class="side-nav" id="sidebar">
+        <div class="sidebar-header">
             <div class="logo">
-                <a href="#">
-                    <i class='bx bxl-gitlab'></i>
-                </a>
+                <img src="images/logo.png">
             </div>
-            <div class="links">
-                <ul>
-                    <li>
-                        <a href="#" class="active">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact Us</a>
-                    </li>
-                    <li>
-                        <a href="#">More Info</a>
-                    </li>
-                </ul>
+            <div class="header-text">
+                <span class="text-1">Montfort Learner</span>
+                <span class="text-2">Profile Management System</span>
             </div>
         </div>
-        <div class="button-container">
-            <a href="#" class="signup-btn">Sign Up</a>
+
+        <div class="sidebar-body">
+            <ul class="sidebar-links">
+                <li>
+                    <a href="#" class="active">
+                        <span class="link-icon"><i class="uil uil-apps"></i></span>
+                        <span class="link-name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="">
+                        <span class="link-icon"><i class="uil uil-apps"></i></span>
+                        <span class="link-name">Training</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="">
+                        <span class="link-icon"><i class="uil uil-apps"></i></span>
+                        <span class="link-name">Trainer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="">
+                        <span class="link-icon"><i class="uil uil-apps"></i></span>
+                        <span class="link-name">Assessment</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="">
+                        <span class="link-icon"><i class="uil uil-apps"></i></span>
+                        <span class="link-name">Student</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-
-        
-
-
     </div>
 
-    <div class="content">
-        <div class="box-container">
-            <div class="box-1">
-                <h2>Box 1</h2>
+    <!-- <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+            <div class="container-fluid navbar-content">
+                <div class="sidebar-btn" onclick="sidebarToggle()">
+                    <i class="uil uil-bars"></i>
+                </div>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                       <span><i class="fa-solid fa-user-large"></i></span> Administrator
+                    </button>
+                    <ul class="dropdown-menu text-center">
+                      <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                    </ul>
+                  </div>
             </div>
-            <div class="box-2">
-                <h2>Box 2</h2>  
-            </div>
-        </div>
-    </div>
+        </nav>
+    </div> -->
 
 
 
+
+
+    <script src="js/functions.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="logo">
+            <img src="images/logo.png">
+        </div>
+        <div class="header-text">
+            <span class="text-1">Montfort Learner</span>
+            <span class="text-2">Profile Management System</span>
+        </div>
+    </div>
+
+    <div class="sidebar-body">
+        <ul class="sidebar-links">
+            <li>
+                <a href="#" class="active">
+                    <span class="link-icon"><i class="uil uil-apps"></i></span>
+                    <span class="link-name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="">
+                    <span class="link-icon"><i class="uil uil-apps"></i></span>
+                    <span class="link-name">Training</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="">
+                    <span class="link-icon"><i class="uil uil-apps"></i></span>
+                    <span class="link-name">Trainer</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="">
+                    <span class="link-icon"><i class="uil uil-apps"></i></span>
+                    <span class="link-name">Assessment</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="">
+                    <span class="link-icon"><i class="uil uil-apps"></i></span>
+                    <span class="link-name">Student</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <div class="container-fluid navbar-content">
+            <div class="sidebar-btn" onclick="sidebarToggle()">
+                <i class="uil uil-bars"></i>
+            </div>
+            <div class="dropdown">
+                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                   <span><i class="fa-solid fa-user-large"></i></span> Administrator
+                </button>
+                <ul class="dropdown-menu text-center">
+                  <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                </ul>
+              </div>
+        </div>
+    </nav>
+</div>
